@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <title>From Amaan</title>
+  <title>From Amaan</title>
+  <style>
+    /* Monochrome Terminal Diary: keep the canvas black, copy spare, type pixelated,
+       and coral reserved for navigation. This file intentionally contains the whole site. */
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Press+Start+2P&display=swap');
+
+    :root {
+      --black: #e6e6fa;
+      --white: #;
+      --muted: #+   ;
+      --line: #000;
+      --coral: hsl(229, 100%, 84%);
+      --ease: cubic-bezier(.23, 1, .32, 1);
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--black); scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+  
+    .portfolio { width: min(100%, 1120px); margin: 0 auto; }
+    .page {
+      min-height: 100vh;
+      padding: 18px clamp(18px, 7vw, 90px) 72px;
+      position: relative;
+      scroll-margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+    }
+    .page + .page { border-top: 1px solid var(--line); }
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font: 8px/1.5 'Press Start 2P', monospace;
+      text-transform: uppercase;
+    }
+    .signal {
+      display: flex;
+      gap: 18px;
+      margin-top: 88px;
+      padding: 0 10vw;
+    }
+    h1, h2 {
+      margin: 0;
+      font-family: 'Press Start 2P', monospace;
+      font-weight: 400;
+      letter-spacing: -.06em;
+    }
+    h1 { display: grid; gap: 16px; font-size: clamp(28px, 5vw, 58px); line-height: 1.35; }
+    h1 span { font-size: clamp(18px, 3vw, 34px); }
+    .lead { max-width: 500px; margin: 22px 0 0; font-size: clamp(14px, 1.5vw, 18px); line-height: 1.8; }
+    .next {
+      align-self: flex-end;
+      border: 0;
+      padding: 0;
+      margin-top: auto;
+      background: transparent;
+      color: var(--coral);
+      cursor: pointer;
+      font: clamp(17px, 2.4vw, 30px)/1.4 'Press Start 2P', monospace;
+      transition: transform 160ms var(--ease), color 160ms var(--ease);
+    }
+    .next:active { transform: scale(.97); }
+    .heading { margin: clamp(100px, 16vh, 180px) 0 0 clamp(0px, 8vw, 100px); }
+    .heading small { display: block; color: var(--muted); font: 8px/1.5 'Press Start 2P', monospace; margin-bottom: 18px; }
+    h2 { font-size: clamp(22px, 4vw, 48px); line-height: 1.55; }
+    .section-body { margin: clamp(65px, 10vh, 110px) 0 0 clamp(0px, 8vw, 100px); }
+    .section-label { color: var(--muted); font: 8px/1.5 'Press Start 2P', monospace; text-transform: uppercase; }
+    .education { margin-top: 12px; font: clamp(18px, 2.4vw, 28px)/1.6 'Press Start 2P', monospace; }
+    .education::after { color: var(--coral); content: '.'; }
+    ul { list-style: none; padding: 0; margin: 14px 0 0; }
+    li { padding-left: 20px; }
+    li::before { content: '*'; color: var(--coral); margin-left: -20px; margin-right: 6px; }
+    .skills { margin-top: 56px; }
+    .skills ul { columns: 2; column-gap: 50px; max-width: 620px; }
+    .skills li { break-inside: avoid; }
+    .page-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: end; gap: 24px; padding-top: 70px; }
+    .hint { margin: 0; color: var(--muted); font-size: 9px; }
+
+    .projects { margin: clamp(65px, 10vh, 110px) 0 0 clamp(0px, 5vw, 65px); }
+    .project { display: grid; grid-template-columns: 38px 1fr; gap: 14px; padding: 24px 0; border-top: 1px solid var(--line); }
+    .project:last-child { border-bottom: 1px solid var(--line); }
+    .number { color: var(--muted); font: 8px/2 'Press Start 2P', monospace; }
+    .project a { display: inline-block; color: var(--white); font: clamp(13px, 1.6vw, 19px)/1.7 'Press Start 2P', monospace; text-decoration: none; transition: color 160ms var(--ease); }
+    .project a:hover { color: var(--coral); }
+    .project a span { color: var(--coral); }
+    .project p { max-width: 680px; margin: 5px 0 0; font-size: 13px; line-height: 1.75; }
+    .project .repo { color: var(--muted); font-size: 11px; }
+
+    .closing { max-width: 720px; margin: clamp(70px, 12vh, 135px) 0 0 clamp(0px, 8vw, 100px); font-size: clamp(14px, 1.55vw, 18px); line-height: 1.9; }
+    .contacts { margin-top: auto; padding: 60px 0 0 clamp(0px, 8vw, 100px); }
+    .contacts::before { display: block; height: 1px; background: var(--line); margin-bottom: 20px; content: ''; }
+    .contact { display: grid; grid-template-columns: 100px 1fr; gap: 18px; padding: 8px 0; }
+    .contact strong { color: var(--muted); font: 8px/2 'Press Start 2P', monospace; font-weight: 400; }
+    .contact a { text-underline-offset: 5px; text-decoration-color: var(--coral); overflow-wrap: anywhere; }
+    .contact a:hover { color: var(--coral); }
+    .back { align-self: flex-start; margin-top: 54px; color: var(--white); font-size: 10px; }
+
+    @media (max-width: 620px) {
+      body { font-size: 12px; }
+      .page { min-height: 100svh; padding: 16px 16px 56px; }
+      .meta { font-size: 7px; }
+      .signal { gap: 12px; margin-top: 76px; padding: 0 12vw; }
+      .signal .long { width: 74px; }
+      .signal .short { width: 50px; }
+      .signal img { width: 24px; height: 24px; }
+      .intro-copy { margin-top: 96px; }
+      .snorlax { width: 96px; height: 96px; margin-bottom: 24px; }
+      h1 { gap: 11px; font-size: 27px; }
+      h1 span { font-size: 18px; }
+      .lead { font-size: 12px; line-height: 1.85; }
+      .next { margin-top: 70px; font-size: 16px; }
+      .heading { margin: 88px 0 0; }
+      h2 { font-size: 21px; }
+      .section-body, .closing { margin-left: 0; }
+      .section-body { margin-top: 60px; }
+      .education { font-size: 18px; }
+      .skills { margin-top: 48px; }
+      .skills ul { columns: 1; }
+      .page-footer { align-items: flex-start; flex-direction: column; }
+      .page-footer .next { align-self: flex-end; }
+      .projects { margin-left: 0; margin-top: 56px; }
+      .project { grid-template-columns: 28px 1fr; gap: 10px; padding: 20px 0; }
+      .project a { font-size: 12px; }
+      .project p { font-size: 11px; }
+      .project .repo { font-size: 10px; }
+      .closing { margin-top: 62px; font-size: 12px; line-height: 1.9; }
+      .contacts { padding-left: 0; padding-top: 62px; }
+      .contact { grid-template-columns: 62px 1fr; gap: 11px; font-size: 11px; }
+      .contact strong { font-size: 7px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="portfolio">
+    <section class="page" id="intro">
+      <div class="meta"><span>Page 1</span><span>Amaan</span></div>
+      <div class="signal" aria-hidden="true">
+        <span class="long"></span><span class="short"></span>
+      </div>
+      <div class="intro-copy">
+      <a href="https://imgbb.com/" target="_blank" rel="noreferrer" aria-label="View the profile image source"><img class="meow" src="https://i.ibb.co/KzbyFYSK/loid.png" alt="Pixel-art Loid portrait" width="96" height="96" loading="lazy" decoding="async"></a>
+        <h1>Hi,<span>From Amaan</span></h1>
+        <p class="lead">I'm a developer who uses Python and Go and sometimes vanilla web. I'm still mastering Pythonics (SO) and Go (boot.dev).</p>
+      </div>
+      <button class="next" data-next="education">Next <span aria-hidden="true">↘</span></button>
+    </section>From Amaan
+
+
+    <section class="page" id="education">
+      <div class="meta"><span>Page 2</span><span>Education / Skills</span></div>
+      <div class="heading"><small>02 / 04</small><h2>education.</h2></div>
+      <div class="section-body">
+        <div class="section-label">Current education</div>
+        <div class="education">High school</div>
+        <ul><li>CSSOP</li><li>boot.dev</li></ul>
+        <div class="skills">
+          <div class="section-label">Skills</div>
+          <ul>
+            <li>Algorithmic thinking</li><li>Problem decomposition</li><li>Collaboration skills</li><li>Linux</li>
+            <li>DevOps</li><li>OpenCode <span class="hint">(TUI agent sometimes)</span></li><li>Autocomplete <span class="hint">(Windsurf)</span></li><li>Inkscape</li>
+          </ul>
+        </div>
+      </div>
+      <div class="page-footer"><p class="hint">chug coffee,sleep</p><button class="next" data-next="projects">Next <span aria-hidden="true">↘</span></button></div>
+    </section>
+
+    <section class="page" id="projects">
+      <div class="meta"><span>Page 3</span><span>Projects</span></div>
+      <div class="heading"><small>03 / 04</small><h2>Projects<span style="color:var(--coral)">:</span></h2></div>
+      <div class="projects">
+        <article class="project"><span class="number">01</span><div><a href="https://github.com/old-droid/XTRAIN" target="_blank" rel="noreferrer">Xtrain <span>↗</span></a><p>CPU-focused ML framework with Numba kernels.</p><p class="repo">github.com/old-droid/XTRAIN</p></div></article>
+        <article class="project"><span class="number">02</span><div><a href="https://github.com/old-droid/ShareANYTHING" target="_blank" rel="noreferrer">ShareANYTHING <span>↗</span></a><p>File sharing web service with Django and pure HTML, CSS, and JS.</p><p class="repo">github.com/old-droid/ShareANYTHING</p></div></article>
+        <article class="project"><span class="number">03</span><div><a href="https://github.com/old-droid/Codestry" target="_blank" rel="noreferrer">Codestry <span>↗</span></a><p>Coding editor using simplified blocks for writing Go code, built with Go itself.</p><p class="repo">github.com/old-droid/Codestry</p></div></article>
+        <article class="project"><span class="number">04</span><div><a href="https://github.com/old-droid/Meowbucks" target="_blank" rel="noreferrer">Meowbucks <span>↗</span></a><p>Cafe helper bot CLI with a minimal web dashboard for kitchen staff.</p><p class="repo">github.com/old-droid/Meowbucks</p></div></article>
+      </div>
+      <div class="page-footer"><p class="hint">github / old-droid</p><button class="next" data-next="now">Next <span aria-hidden="true">↘</span></button></div>
+    </section>
+
+    <section class="page" id="now">
+      <div class="meta"><span>Page 4</span><span>Next</span></div>
+      <div class="heading"><small>04 / 04</small><h2>What's next?</h2></div>
+      <p class="closing">I'm currently focusing on getting CSSOP and boot.dev's Go course done in a few months. I'm also planning to spend more time on maths through Khan Academy, including linear algebra and calculus, while continuing to build small tools that make systems easier to understand. After that, I want to work through MIT OpenCourseWare's CS material and turn more of these experiments into useful software.</p>
+      <div class="contacts">
+        <div class="contact"><strong>GitHub</strong><a href="https://github.com/old-droid" target="_blank" rel="noreferrer">github.com/old-droid ↗</a></div>
+        <div class="contact"><strong>Email</strong><a href="mailto:pancakeraachinoult@protonmail.com">pancakeraachinoult@protonmail.com ↗</a></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    document.querySelectorAll('[data-next]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var target = document.getElementById(button.dataset.next);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Home') document.getElementById('intro').scrollIntoView({ behavior: 'smooth' });
+      if (event.key === 'ArrowDown' || event.key === 'PageDown') {
+        var pages = Array.from(document.querySelectorAll('.page'));
+        var current = pages.reduce(function (best, page, index) {
+          return Math.abs(page.getBoundingClientRect().top) < Math.abs(pages[best].getBoundingClientRect().top) ? index : best;
+        }, 0);
+        var next = pages[Math.min(current + 1, pages.length - 1)];
+        if (next) { event.preventDefault(); next.scrollIntoView({ behavior: 'smooth' }); }
+      }
+    });
+  </script>
+</body>
+</html>
